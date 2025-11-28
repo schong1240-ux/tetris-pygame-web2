@@ -355,5 +355,54 @@ startButton.addEventListener('click', () => {
     }
 });
 
+// 모바일 컨트롤 이벤트 리스너
+document.getElementById('moveLeft').addEventListener('click', () => {
+    if (!currentTetromino) return;
+    if (!checkCollision(-1, 0, currentTetromino.rotation)) {
+        currentTetromino.x--;
+    }
+    drawTetromino();
+});
+
+document.getElementById('moveRight').addEventListener('click', () => {
+    if (!currentTetromino) return;
+    if (!checkCollision(1, 0, currentTetromino.rotation)) {
+        currentTetromino.x++;
+    }
+    drawTetromino();
+});
+
+document.getElementById('moveDown').addEventListener('click', () => {
+    if (!currentTetromino) return;
+    moveDown();
+    score += 1; // 소프트 드롭 점수
+    scoreDisplay.textContent = score;
+    drawTetromino();
+});
+
+document.getElementById('rotate').addEventListener('click', () => {
+    if (!currentTetromino) return;
+    const newRotation = (currentTetromino.rotation + 1) % currentTetromino.shape.length;
+    if (!checkCollision(0, 0, newRotation)) {
+        currentTetromino.rotation = newRotation;
+    }
+    drawTetromino();
+});
+
+document.getElementById('hardDrop').addEventListener('click', () => {
+    if (!currentTetromino) return;
+    while (!checkCollision(0, 1, currentTetromino.rotation)) {
+        currentTetromino.y++;
+        score += 2; // 하드 드롭 점수
+    }
+    solidifyTetromino();
+    clearLines();
+    if (!spawnTetromino()) {
+        return; // 게임 오버 시 종료
+    }
+    scoreDisplay.textContent = score;
+    drawTetromino();
+});
+
 // 초기 게임 보드 렌더링 (시작 전)
 initBoard();
