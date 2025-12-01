@@ -173,6 +173,18 @@ body {
     /* 모바일에서는 #mobile-controls만 표시되도록 변경 */
     #mobile-controls {
         display: flex; /* 모바일에서만 표시 */
+        margin: 20px auto 0 auto; /* 상단 마진 20px, 좌우 자동 마진으로 중앙 정렬 */
+        max-width: 300px; /* 버튼 레이아웃 최대 너비 */
+    }
+
+    body {
+        flex-direction: column;
+    }
+
+    #game-container {
+        margin: 0 auto;
+        width: 100%;
+        max-width: 420px; /* 게임 보드(250) + 사이드 패널(150) + 마진/패딩(20) = 420px */
     }
     /* body의 padding을 모바일에서 조금 더 줄 수 있음 (선택 사항) */
     /* body { padding: 10px; } */
